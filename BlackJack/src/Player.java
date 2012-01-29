@@ -17,6 +17,13 @@ public class Player
 		this.bet = 0;
 	}
 	
+	public void initHand(Deck d)
+	{
+		hand = new ArrayList<Hand>();
+		hand.add(new Hand());
+		hand.get(0).Add(d.draw());
+	}
+	
 	public boolean hit(Deck d)
 	{
 		boolean r = false;
@@ -37,6 +44,12 @@ public class Player
 		this.willPlay = false;
 	}
 	
+	public void surrender()
+	{
+		this.willPlay = false;
+		this.money += this.bet / 2;
+	}
+	
 	public boolean doubl(Deck d, int amt)
 	{
 		return true;
@@ -53,9 +66,10 @@ public class Player
 	{
 		boolean r = false;
 		
-		if ( b <= this.money)
+		if ( b <= this.money && b > 0)
 		{
 			this.bet = b;
+			this.money -= b;
 			r = true;
 		}
 		return r;
@@ -68,7 +82,7 @@ public class Player
 		for ( int i = 0; i < this.hand.size(); i++)
 		{
 			r += "Hand " + i + ": ";
-			this.hand.get(i).toString();
+			r += this.hand.get(i).toString();
 			r += "\n";
 		}
 		

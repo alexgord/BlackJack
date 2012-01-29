@@ -1,6 +1,7 @@
 import java.util.Random;
 
-public class Deck {
+public class Deck
+{
 
 	private static final int DECK_SIZE = 52;
 
@@ -11,7 +12,8 @@ public class Deck {
 	 * Constructs a deck and initialises it with all possible cards.
 	 * The deck will be sorted from Ace to King.
 	 */
-	public Deck() {
+	public Deck()
+	{
 		deck = new Card[DECK_SIZE];
 		current = 0;
 		
@@ -24,7 +26,8 @@ public class Deck {
 	/**
 	 * Shuffles the deck.
 	 */
-	public void shuffle() {
+	public void shuffle()
+	{
 		Random generator = new Random();
 		for(int i=0; i<deck.length; i++) {
 			int randPos = generator.nextInt(deck.length);
@@ -39,7 +42,8 @@ public class Deck {
 	 * Draws the card from the top of the deck.
 	 * @return top card
 	 */
-	public Card draw() {
+	public Card draw()
+	{
 		if (hasCards())
 			return deck[current++];
 		else
@@ -50,7 +54,8 @@ public class Deck {
 	 * Checks for remaining cards.
 	 * @return
 	 */
-	public boolean hasCards() {
+	public boolean hasCards()
+	{
 		return current < deck.length;
 	}
 	

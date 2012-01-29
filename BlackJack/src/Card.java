@@ -34,7 +34,7 @@ public class Card
 	@Override
 	public String toString()
 	{
-		return suit.toString() + rank.toString();
+		return rank.toString() + " of " + suit.toString(); 
 	}
 	
 	public ArrayList<Integer> getValues()
