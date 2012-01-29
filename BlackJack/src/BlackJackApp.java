@@ -6,44 +6,30 @@ public class BlackJackApp
 	/**
 	 * @param args
 	 */
-	private static Player player;
-	private static Player opponent;
+	private static You player;
+	private static Opponent opponent;
 	private static Scanner sc;
 	private static Deck deck;
-	
+	private static int rounds;
 	public static void main(String[] args) 
 	{
 		// TODO Auto-generated method stub
+		rounds = 0;
 		deck = new Deck();
 		sc = new Scanner(System.in);
-		player = new Player();
-		opponent = new Player();
+		player = new You();
+		opponent = new Opponent();
+		
+		deck.shuffle();
 		System.out.println("Alexandre's Casino!");
 		
-		player.initHand(deck);
-		opponent.initHand(deck);
-		
-		System.out.print("Opponent: ");
-		System.out.println(opponent.toString());
-		
-		System.out.print("You: ");
-		System.out.println(player.toString());
-	}
-	
-	private static void getBet()
-	{
-		int entered;
 		do
 		{
-			System.out.println("Bet must be between 1 and" + player.getMoney());
-			System.out.print("Enter Bet: ");
-			entered = sc.nextInt();
+			player.Play(deck, sc, rounds);
+			opponent.Play(deck, rounds);
+			rounds++;
 		}
-		while ( !player.Bet(entered));
-	}
+		while (!player.Lost());
 	
-	private static void OpponentPlay()
-	{
-		
 	}
 }

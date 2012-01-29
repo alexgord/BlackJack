@@ -2,19 +2,19 @@ import java.util.ArrayList;
 
 public class Player
 {
-	private ArrayList<Hand> hand;
-	private int money;
-	private int bet;
+	protected ArrayList<Hand> hand;
+	protected static int money;
+	private static int bet;
 	private int score;
 	private boolean willPlay;
 	
 	public Player()
 	{
 		this.hand = new ArrayList<Hand>();
-		this.money = 1000;
+		money = 1000;
 		this.score = 0;
 		this.willPlay = true;
-		this.bet = 0;
+		bet = 0;
 	}
 	
 	public void initHand(Deck d)
@@ -29,7 +29,7 @@ public class Player
 		boolean r = false;
 		for ( int i = 0; i < hand.size(); i++ )
 		{
-			if ( isHandPlayable(hand.get(i)))
+			if ( hand.get(i).isHandPlayable())
 			{
 				hand.get(i).Add(d.draw());
 				r = true;
@@ -47,7 +47,7 @@ public class Player
 	public void surrender()
 	{
 		this.willPlay = false;
-		this.money += this.bet / 2;
+		money += bet / 2;
 	}
 	
 	public boolean doubl(Deck d, int amt)
@@ -62,14 +62,14 @@ public class Player
 		hand.add(tmp);
 	}
 	
-	public boolean Bet(int b)
+	protected static boolean Bet(int b)
 	{
 		boolean r = false;
 		
-		if ( b <= this.money && b > 0)
+		if ( b <= money && b > 0)
 		{
-			this.bet = b;
-			this.money -= b;
+			bet = b;
+			money -= b;
 			r = true;
 		}
 		return r;
@@ -95,12 +95,7 @@ public class Player
 	private void updateScore()
 	{
 		
-	}
-	
-	private boolean isHandPlayable( Hand h )
-	{
-		return BlackJackCardValues.getCombinedValuesOfCardHand(h.getHand()) <= 21;
-	}
+	}	
 	
 	public boolean getWillPlay()
 	{
@@ -112,13 +107,13 @@ public class Player
 		return this.score;
 	}
 	
-	public int getMoney()
+	public static int getMoney()
 	{
-		return this.money;
+		return money;
 	}
 	
-	public int getBet()
+	private int getBet()
 	{
-		return this.bet;
+		return bet;
 	}
 }
