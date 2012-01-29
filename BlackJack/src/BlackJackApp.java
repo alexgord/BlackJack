@@ -1,5 +1,5 @@
-
-public class BlackJackApp {
+public class BlackJackApp
+{
 
 	/**
 	 * @param args
