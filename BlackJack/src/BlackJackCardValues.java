@@ -29,11 +29,11 @@ public class BlackJackCardValues
 				break;
 			case TEN: list.add(10);
 				break;
-			case JACK: list.add(11);
+			case JACK: list.add(10);
 				break;
-			case QUEEN: list.add(12);
+			case QUEEN: list.add(10);
 				break;
-			case KING: list.add(13);
+			case KING: list.add(10);
 				break;
 		}
 		return new ArrayList<Integer>();

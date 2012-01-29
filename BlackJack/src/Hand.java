@@ -13,6 +13,11 @@ public class Hand
 		hand.add(c);
 	}
 	
+	public Card Pop()
+	{
+		return hand.remove(hand.size());
+	}
+	
 	public String toString()
 	{
 		String p = new String();
@@ -27,5 +32,16 @@ public class Hand
 	public int getValue()
 	{
 		return BlackJackCardValues.getCombinedValuesOfCardHand(this.hand);
+	}
+	
+	public ArrayList<Card> getHand()
+	{
+		return this.hand;
+	}
+	
+	public boolean isBlackJack()
+	{
+		
+		return true;
 	}
 }
