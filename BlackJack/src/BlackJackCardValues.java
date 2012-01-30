@@ -36,19 +36,20 @@ public class BlackJackCardValues
 			case KING: list.add(10);
 				break;
 		}
-		return new ArrayList<Integer>();
+		return list;
 	}
 	
 	public static int getCombinedValuesOfCardHand(ArrayList<Card> c)
 	{
 		ArrayList<Integer> possibleValues = new ArrayList<Integer>();
 		int returnedValue = 0;
-		for (int i = 0; i < c.get(i).getValues().size(); i++  )
+		
+		for (int i = 0; i < c.size(); i++  )
 		{
 			int currentValue = 0;
-			for (int j = 0; j < c.size(); j++ )
+			for (int j = 0; j < c.get(i).getValues().size(); j++ )
 			{
-				currentValue += c.get(j).getValues().get(i);
+				currentValue += c.get(i).getValues().get(j);
 			}
 			
 			possibleValues.add(currentValue);
@@ -58,9 +59,9 @@ public class BlackJackCardValues
 		int a;
 		for ( a = possibleValues.size(); a > 0; a-- )
 		{
-			if (possibleValues.get(a) <= 21)
+			if (possibleValues.get(a - 1) <= 21)
 			{
-				returnedValue = possibleValues.get(a);
+				returnedValue = possibleValues.get(a -1);
 				break;
 			}
 		}

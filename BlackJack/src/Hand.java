@@ -41,8 +41,28 @@ public class Hand
 	
 	public boolean isBlackJack()
 	{
+		boolean hasAce = false;
+		boolean hasTen = false;
 		
-		return true;
+		for ( int i = 0; i < hand.size(); i++ )
+		{
+			if ( hand.get(i).getFace() == Rank.ACE )
+			{
+				hasAce = true;
+				break;
+			}
+		}
+		
+		for ( int i = 0; i < hand.size(); i++ )
+		{
+			if ( hand.get(i).getValues().get(0) == 10 )
+			{
+				hasTen = true;
+				break;
+			}
+		}
+		
+		return hasTen && hasAce && hand.size() == 2;
 	}
 	
 	public boolean isHandPlayable( )

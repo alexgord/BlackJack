@@ -29,7 +29,7 @@ public class BlackJackApp
 			opponent.Play(deck, rounds);
 			rounds++;
 		}
-		while (!player.Lost());
+		while (!player.Lost() && player.getWillPlay());
 	
 	}
 }

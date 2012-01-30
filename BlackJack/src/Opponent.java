@@ -27,5 +27,8 @@ public class Opponent extends Player
 		{
 			stand();
 		}
+		
+		System.out.println("Opponent's turn");
+		System.out.println(toString());
 	}
 }
