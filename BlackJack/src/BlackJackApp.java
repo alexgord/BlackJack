@@ -14,22 +14,22 @@ public class BlackJackApp
 	public static void main(String[] args) 
 	{
 		// TODO Auto-generated method stub
-		rounds = 0;
+		//rounds = 0;
 		deck = new Deck();
 		sc = new Scanner(System.in);
-		player = new You();
-		opponent = new Opponent();
+		//player = new You();
+		//opponent = new Opponent();
 		
-		deck.shuffle();
-		System.out.println("Alexandre's Casino!");
+		//deck.shuffle();
+		//System.out.println("Alexandre's Casino!");
 		
-		do
-		{
-			player.Play(deck, sc, rounds);
-			opponent.Play(deck, rounds);
-			rounds++;
-		}
-		while (!player.Lost() && player.getWillPlay());
-	
+		//do
+		//{
+			//player.Play(deck, sc, rounds);
+			//opponent.Play(deck, rounds);
+			//rounds++;
+		//}
+		//while (!player.Lost() && player.getWillPlay());
+		BlackJackCardValues.test(sc);
 	}
 }
