@@ -85,6 +85,24 @@ public class BlackJackCardValues
 		return returnedValue;
 	}
 	
+	private static void printTable(String prefix, ArrayList<ArrayList<Integer>> arr, int cindex)
+	{
+		if ( cindex == arr.size() -1 )
+		{
+			for ( int c = 0; c < arr.get(cindex).size(); c++ )
+			{
+				System.out.println(prefix + arr.get(cindex).get(c));
+			}
+		}
+		else
+		{
+			for ( int c = 0; c < arr.get(cindex).size(); c++ )
+			{
+				printTable(prefix + arr.get(cindex).get(c), arr, cindex + 1);
+			}
+		}
+	}
+	
 	public static void test( Scanner sc)
 	{
 		
@@ -109,25 +127,6 @@ public class BlackJackCardValues
 		testar.add(test2);
 		testar.add(test3);
 		
-		for (int a = 0; a < testar.size(); a++)
-		{
-			for (int b = 0; b < testar.get(a).size() ; b++)
-			{
-				for (int c = 0; c < testar.get(a).size() * testar.get(a).size(); c++)
-				{
-					System.out.print(testar.get(a).get(b));
-				}				
-			}
-			System.out.print("\n");
-		}
-		
-		//for ( int i = 0; i < testar.size(); i++)
-		//{
-			//for (int j = 0; j < testar.get(i).size(); j++)
-			//{
-			//	System.out.print(testar.get(i).get(j));
-			//}
-			//System.out.print("\n");
-		//}
+		printTable("", testar, 0);
 	}
 }
