@@ -13,40 +13,28 @@ public class BlackJackCardValues
 				list.add(11);
 				break;
 			case TWO: list.add(2);
-				list.add(0);
 				break;
 			case THREE: list.add(3);
-				list.add(0);
 				break;
 			case FOUR: list.add(4);
-				list.add(0);
 				break;
 			case FIVE: list.add(5);
-				list.add(0);
 				break;
 			case SIX: list.add(6);
-				list.add(0);
 				break;
 			case SEVEN: list.add(7);
-				list.add(0);
 				break;
 			case EIGHT: list.add(8);
-				list.add(0);
 				break;
 			case NINE: list.add(9);
-				list.add(0);
 				break;
 			case TEN: list.add(10);
-				list.add(0);
 				break;
 			case JACK: list.add(10);
-				list.add(0);
 				break;
 			case QUEEN: list.add(10);
-				list.add(0);
 				break;
 			case KING: list.add(10);
-				list.add(0);
 				break;
 		}
 		return list;
@@ -54,56 +42,23 @@ public class BlackJackCardValues
 	
 	public static int getCombinedValuesOfCardHand(ArrayList<Card> c)
 	{
-		ArrayList<Integer> possibleValues = new ArrayList<Integer>();
 		int returnedValue = 0;
+		ArrayList<ArrayList<Integer>> values = new ArrayList<ArrayList<Integer>>();
+		ArrayList<Integer> sum = new ArrayList<Integer>();
 		
-		for (int i = 0; i < c.size(); i++  )
+		for ( int i = 0; i < c.size(); i++)
 		{
-			int currentValue = 0;
-			for (int j = 0; j < c.get(i).getValues().size(); j++ )
-			{
-				currentValue += c.get(i).getValues().get(j);
-			}
-			
-			possibleValues.add(currentValue);
+			values.add(c.get(i).getValues());
 		}
 		
-		Collections.sort(possibleValues);
-		int a;
-		for ( a = possibleValues.size(); a > 0; a-- )
-		{
-			if (possibleValues.get(a - 1) <= 21)
-			{
-				returnedValue = possibleValues.get(a -1);
-				break;
-			}
-		}
-		if ( a < 0)
-		{
-			returnedValue = possibleValues.get(0);
-		}
+		generateSums(sum, 0, values, 0);
+		
+		sort(sum);
+		
 		return returnedValue;
-	}
+	}	
 	
-	private static void printTable(String prefix, ArrayList<ArrayList<Integer>> arr, int cindex)
-	{
-		if ( cindex == arr.size() -1 )
-		{
-			for ( int c = 0; c < arr.get(cindex).size(); c++ )
-			{
-				System.out.println(prefix + arr.get(cindex).get(c));
-			}
-		}
-		else
-		{
-			for ( int c = 0; c < arr.get(cindex).size(); c++ )
-			{
-				printTable(prefix + arr.get(cindex).get(c), arr, cindex + 1);
-			}
-		}
-	}
-	
-	public static void test( Scanner sc)
+	public static void test()
 	{
 		
 		ArrayList<ArrayList<Integer>> testar = new ArrayList<ArrayList<Integer>>();
@@ -127,6 +82,52 @@ public class BlackJackCardValues
 		testar.add(test2);
 		testar.add(test3);
 		
-		printTable("", testar, 0);
+		ArrayList<Integer> sum = new ArrayList<Integer>();
+		
+		generateSums(sum, 0, testar, 0);
+		
+		sort(sum);
+		
+		for ( int i = 0; i < sum.size(); i++ )
+		{
+			System.out.println(sum.get(i));
+		}
+	}
+	
+	private static void generateSums(ArrayList<Integer> sum, int prefix, ArrayList<ArrayList<Integer>> arr, int cindex)
+	{
+		if ( cindex == arr.size() -1 )
+		{
+			for ( int c = 0; c < arr.get(cindex).size(); c++ )
+			{
+				sum.add(prefix + arr.get(cindex).get(c));
+			}
+		}
+		else
+		{
+			for ( int c = 0; c < arr.get(cindex).size(); c++ )
+			{
+				generateSums(sum, prefix + arr.get(cindex).get(c), arr, cindex + 1);
+			}
+		}
+	}
+	
+	private static void sort(ArrayList<Integer> sum)
+	{
+		int n = sum.size();
+	    boolean doMore = true;
+	    while (doMore) {
+	        n--;
+	        doMore = false;  // assume this is our last pass over the array
+	        for (int i=0; i<n; i++) {
+	            if (sum.get(i) > sum.get(i+1)) {
+	                // exchange elements
+	                int temp = sum.get(i);
+	                sum.set(i, sum.get(i+1));
+	                sum.set(i+1, temp);
+	                doMore = true;  // after an exchange, must look again 
+	            }
+	        }
+	    }
 	}
 }

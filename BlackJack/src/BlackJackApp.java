@@ -30,6 +30,6 @@ public class BlackJackApp
 			//rounds++;
 		//}
 		//while (!player.Lost() && player.getWillPlay());
-		BlackJackCardValues.test(sc);
+		BlackJackCardValues.test();
 	}
 }
