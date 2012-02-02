@@ -89,6 +89,7 @@ public class BlackJackCardValues
 	{
 		
 		ArrayList<ArrayList<Integer>> testar = new ArrayList<ArrayList<Integer>>();
+		//ArrayList<ArrayList<Integer>> testarray = new ArrayList<ArrayList<Integer>>();
 		ArrayList<Integer> test1 = new ArrayList<Integer>();
 		ArrayList<Integer> test2 = new ArrayList<Integer>();
 		ArrayList<Integer> test3 = new ArrayList<Integer>();
@@ -110,22 +111,23 @@ public class BlackJackCardValues
 		
 		for (int a = 0; a < testar.size(); a++)
 		{
-			for (int b = 0; b < testar.get(a).size() * testar.get(a).size() ; b++)
+			for (int b = 0; b < testar.get(a).size() ; b++)
 			{
-				for (int c = 0; c < testar.get(a).size() * testar.get(a).size() ; c++)
+				for (int c = 0; c < testar.get(a).size() * testar.get(a).size(); c++)
 				{
-					
-				}
-			}
-		}
-		
-		for ( int i = 0; i < testar.size(); i++)
-		{
-			for (int j = 0; j < testar.get(i).size(); j++)
-			{
-				System.out.print(testar.get(i).get(j));
+					System.out.print(testar.get(a).get(b));
+				}				
 			}
 			System.out.print("\n");
 		}
+		
+		//for ( int i = 0; i < testar.size(); i++)
+		//{
+			//for (int j = 0; j < testar.get(i).size(); j++)
+			//{
+			//	System.out.print(testar.get(i).get(j));
+			//}
+			//System.out.print("\n");
+		//}
 	}
 }
