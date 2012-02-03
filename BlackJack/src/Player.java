@@ -3,8 +3,8 @@ import java.util.ArrayList;
 public class Player
 {
 	protected ArrayList<Hand> hand;
-	protected static int money;
-	protected static int bet;
+	protected int money;
+	protected int bet;
 	protected int handWillPlay;
 	
 	public Player()
@@ -67,7 +67,7 @@ public class Player
 		return r;
 	}
 	
-	protected static boolean Bet(int b)
+	protected boolean Bet(int b)
 	{
 		boolean r = false;
 		
@@ -116,7 +116,7 @@ public class Player
 		return hand.get(h).getValue();
 	}
 	
-	public static int getMoney()
+	public int getMoney()
 	{
 		return money;
 	}

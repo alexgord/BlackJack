@@ -4,6 +4,8 @@ public class Hand
 {
 	private ArrayList<Card> hand;
 	public boolean willPlay;
+	private int bet;
+	
 	public Hand()
 	{
 		hand = new ArrayList<Card>();
@@ -70,5 +72,11 @@ public class Hand
 	public boolean isHandPlayable( )
 	{
 		return BlackJackCardValues.getCombinedValuesOfCardHand(this.hand) <= 21;
+	}
+	
+	public int getBet()
+	{
+		return bet;
+	}
 	}
 }
