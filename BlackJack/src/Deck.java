@@ -59,6 +59,14 @@ public class Deck
 		return current < deck.length;
 	}
 	
-
+	public String toString()
+	{
+		String r = "";
+		for ( int i = 0; i < deck.length; i++ )
+		{
+			r += deck[i].toString() + "\n";
+		}
+		return r;
+	}
 	
 }

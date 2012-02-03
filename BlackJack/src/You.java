@@ -4,43 +4,52 @@ import java.util.Scanner;
 
 public class You extends Player
 {	
-	ArrayList<Integer> iOptions;
+	private ArrayList<Integer> iOptions;
+	
 	public void Play(Deck d, Scanner sc, int r)
 	{
+		handWillPlay = 0;
 		int choice;
 		iOptions = new ArrayList<Integer>();
 		if (r == 0)
 		{
 			initHand(d);
 		}
-		String options = GenerateOptions(r);
 		
-		System.out.println("Now it's your turn!");
-		System.out.println(toString());
-		System.out.println("Hand Value" + BlackJackCardValues.getCombinedValuesOfCardHand(hand.get(0).getHand()));
-		
-		if (r == 0)
+		for ( handWillPlay = 0; handWillPlay < hand.size(); handWillPlay++ )
 		{
-			GetBet(sc);
-		}
-		
-		System.out.println("Choose from the following options");
-		System.out.println(options);
-		
-		choice = GetOption(sc);
-		
-		switch (choice)
-		{
-			case 1: if (!hit(d)){willPlay = false;}
-				break;
-			case 2: stand();
-				break;
-			case 3: surrender();
-				break;
-			case 4:	doubl(d, bet);
-				break;
-			case 5: split(d);
-				break;
+			String options = GenerateOptions(r);
+			
+			System.out.println("Now it's your turn!");
+			if (r == 0)
+			{
+				GetBet(sc);
+			}
+			System.out.println(toString());
+			System.out.println("Hand number: " + (handWillPlay + 1));
+			System.out.println("Number of hands you have: " + hand.size());
+			System.out.println("Hand Value: " + BlackJackCardValues.getCombinedValuesOfCardHand(hand.get(handWillPlay).getHand()));		
+			
+			System.out.println("Choose from the following options");
+			System.out.println(options);
+			
+			choice = GetOption(sc);
+			
+			switch (choice)
+			{
+				case 0:
+					break;
+				case 1: if (!hit(d)){hand.get(handWillPlay).willPlay = false;}
+					break;
+				case 2: stand();
+					break;
+				case 3: surrender();
+					break;
+				case 4:	doubl(d, bet);
+					break;
+				case 5: split(d);
+					break;
+			}
 		}
 		
 	}	
@@ -77,25 +86,35 @@ public class You extends Player
 			iOptions.add(4);
 		}
 		
-		if (hand.size() == 0 && hand.get(0).getHand().size() == 2 &&
-			hand.get(0).getHand().get(0) == hand.get(0).getHand().get(1))
+		if (hand.get(handWillPlay).getHand().size() == 2)
 		{
-			r += "Split5\n";
-			iOptions.add(5);
+			if (//hand.size() == 1 && hand.get(handWillPlay).getHand().size() == 2 &&
+				hand.get(handWillPlay).getHand().get(0).getFace() == hand.get(handWillPlay).getHand().get(1).getFace() && money >= bet * 2)
+			{
+				r += "Split - 5\n";
+				iOptions.add(5);
+			}
 		}
-		
 		return r;
 	}
 	
 	private int GetOption( Scanner sc )
 	{
-		int entered;
-		do
+		int entered = 0;
+		
+		if ( hand.get(handWillPlay).isHandPlayable() )
 		{
-			System.out.print("choose corresponding number: ");
-			entered = sc.nextInt();
+			do
+			{
+				System.out.print("choose corresponding number: ");
+				entered = sc.nextInt();
+			}
+			while ( !IsOptionAvailable(entered));
 		}
-		while ( !IsOptionAvailable(entered));
+		else
+		{
+			hand.get(handWillPlay).willPlay = false;
+		}
 		
 		return entered;
 	}
@@ -119,7 +138,7 @@ public class You extends Player
 		int entered;
 		do
 		{
-			System.out.println("Bet must be between 1 and" + getMoney());
+			System.out.println("Bet must be between 1 and " + getMoney());
 			System.out.print("Enter Bet: ");
 			entered = sc.nextInt();
 		}
@@ -129,6 +148,16 @@ public class You extends Player
 	
 	public boolean Lost()
 	{
-		return money == 0;
+		return money <= 0;
+	}
+	
+	public void win()
+	{
+		money += bet * 2;
+	}
+
+	public void draw() 
+	{
+		money += bet;		
 	}
 }

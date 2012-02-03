@@ -3,9 +3,11 @@ import java.util.ArrayList;
 public class Hand
 {
 	private ArrayList<Card> hand;
+	public boolean willPlay;
 	public Hand()
 	{
 		hand = new ArrayList<Card>();
+		willPlay = true;
 	}
 	
 	public void Add(Card c)
@@ -15,7 +17,7 @@ public class Hand
 	
 	public Card Pop()
 	{
-		return hand.remove(hand.size());
+		return hand.remove(hand.size() - 1);
 	}
 	
 	public String toString()

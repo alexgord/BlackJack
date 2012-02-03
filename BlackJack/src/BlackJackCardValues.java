@@ -1,7 +1,5 @@
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+
 public class BlackJackCardValues
 {
 	public static ArrayList<Integer> getValue(Card c)
@@ -54,6 +52,15 @@ public class BlackJackCardValues
 		generateSums(sum, 0, values, 0);
 		
 		sort(sum);
+		
+		for ( int a = 0; a < sum.size(); a++ )
+		{
+			returnedValue = sum.get(a);
+			if ( returnedValue <= 21 )
+			{
+				break;
+			}
+		}
 		
 		return returnedValue;
 	}	
@@ -120,7 +127,7 @@ public class BlackJackCardValues
 	        n--;
 	        doMore = false;  // assume this is our last pass over the array
 	        for (int i=0; i<n; i++) {
-	            if (sum.get(i) > sum.get(i+1)) {
+	            if (sum.get(i) < sum.get(i+1)) {
 	                // exchange elements
 	                int temp = sum.get(i);
 	                sum.set(i, sum.get(i+1));

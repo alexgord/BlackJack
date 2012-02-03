@@ -22,13 +22,16 @@ public class Opponent extends Player
 		if (BlackJackCardValues.getCombinedValuesOfCardHand(this.hand.get(0).getHand()) < 17)
 		{
 			hit(d);
+			System.out.println("opponent hit");
 		}
 		else
 		{
 			stand();
+			System.out.println("Opponent stands");
 		}
 		
 		System.out.println("Opponent's turn");
+		System.out.println("Hand Value: " + BlackJackCardValues.getCombinedValuesOfCardHand(hand.get(handWillPlay).getHand()));
 		System.out.println(toString());
 	}
 }
