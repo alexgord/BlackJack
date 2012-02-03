@@ -78,5 +78,4 @@ public class Hand
 	{
 		return bet;
 	}
-	}
 }
