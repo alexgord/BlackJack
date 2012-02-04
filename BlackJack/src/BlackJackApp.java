@@ -43,7 +43,7 @@ public class BlackJackApp
 					player.hand.get(s).madeFromSplit = false;
 				}
 				
-				if ( opponent.getWillPlay() || rounds == 0)
+				if ( opponent.getWillPlay() )
 				{
 					System.out.println("--------dealer----------------------");
 					opponent.Play(deck, rounds);
@@ -53,7 +53,7 @@ public class BlackJackApp
 					break;
 				}
 				
-				if ( player.getWillPlay() || rounds == 0)
+				if ( player.getWillPlay() )
 				{
 					System.out.println("--------you----------------------");
 					player.Play(deck, sc, rounds);
