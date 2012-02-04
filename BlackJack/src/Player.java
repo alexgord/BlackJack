@@ -45,12 +45,15 @@ public class Player
 	{
 		hand.get(handWillPlay).willPlay = false;
 		money += hand.get(handWillPlay).getBet() / 2;
+		hand.get(handWillPlay).hasSurrendered = true;
 	}
 	
-	public void doubl( Scanner sc )
+	public void doubl( Scanner sc, Deck d )
 	{
 		int addedBet = getDoubleBet(sc);
 		hand.get(handWillPlay).setBet(hand.get(handWillPlay).getBet() + addedBet, money);
+		hit(d);
+		stand();
 	}
 	
 	public int getDoubleBet(Scanner sc)
@@ -142,18 +145,9 @@ public class Player
 		return hand.get(h).isHandPlayable();
 	}
 	
-	public boolean isBlackJack()
+	public boolean isBlackJack(int h)
 	{
-		boolean rv = false;
-		for ( int i = 0; i < hand.size(); i++)
-		{
-			if ( hand.get(i).isBlackJack() )
-			{
-				rv = true;
-				break;
-			}
-		}
-		return rv;
+		return hand.get(h).isBlackJack() && h == 0;
 	}
 	
 	public void deal ( Deck d, int h )

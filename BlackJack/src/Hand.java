@@ -6,12 +6,15 @@ public class Hand
 	public boolean willPlay;
 	private int bet;
 	public boolean madeFromSplit;
+	public boolean hasSurrendered;
+	
 	public Hand()
 	{
 		hand = new ArrayList<Card>();
 		willPlay = true;
 		bet = 0;
 		madeFromSplit = false;
+		hasSurrendered = false;
 	}
 	
 	public void Add(Card c)

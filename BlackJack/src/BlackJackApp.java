@@ -42,6 +42,7 @@ public class BlackJackApp
 				{
 					player.hand.get(s).madeFromSplit = false;
 				}
+				
 				if ( opponent.getWillPlay() || rounds == 0)
 				{
 					System.out.println("--------dealer----------------------");
@@ -63,23 +64,31 @@ public class BlackJackApp
 			for ( int c = 0; c < player.hand.size(); c++)
 			{
 				System.out.println( "\n" + player.hand.get(c).toString() );
-				if (!player.isBust(c) || (opponent.isBust(0) || player.getScore(c) >= opponent.getScore(0)))
+				if (!player.hand.get(c).hasSurrendered)
 				{
-					if ( player.getScore(c) == opponent.getScore(0) && player.isBlackJack() && !opponent.isBlackJack())
+					if ((!player.isBust(c) || (opponent.isBust(0) || player.getScore(c) >= opponent.getScore(0))) )
 					{
-						System.out.println("it was a draw");
-						player.draw(c);
 						
+						if ( player.getScore(c) == opponent.getScore(0) && player.isBlackJack(c) && !opponent.isBlackJack(0))
+						{
+							System.out.println("This hand was a draw");
+							player.draw(c);
+							
+						}
+						else
+						{
+							System.out.println("you won this hand");
+							player.win(c);
+						}
 					}
 					else
 					{
-						System.out.println("you won");
-						player.win(c);
+						System.out.println("dealer won this hand");
 					}
 				}
 				else
 				{
-					System.out.println("dealer won");
+					System.out.println("you surrendered this hand");
 				}
 			}
 			

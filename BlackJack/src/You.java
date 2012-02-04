@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
 public class You extends Player
 {	
 	private ArrayList<Integer> iOptions;
@@ -18,41 +17,43 @@ public class You extends Player
 		
 		for ( handWillPlay = 0; handWillPlay < hand.size(); handWillPlay++ )
 		{
-			String options = GenerateOptions(r);
-			
-			System.out.println("Now it's your turn!");
-			if (r == 0 && !hand.get(handWillPlay).madeFromSplit)
+			if ( hand.get(handWillPlay).getHand().get(0).getFace() == Rank.ACE && handWillPlay > 0 )
 			{
-				GetBet(sc);
-			}
-			
-			System.out.println(toString());
-			System.out.println("Hand number: " + (handWillPlay + 1));
-			System.out.println("Number of hands you have: " + hand.size());
-			System.out.println("Hand Value: " + BlackJackCardValues.getCombinedValuesOfCardHand(hand.get(handWillPlay).getHand()));		
-			
-			System.out.println("Choose from the following options");
-			System.out.println(options);
-			
-			choice = GetOption(sc);
-			
-			switch (choice)
-			{
-				case 0:
-					break;
-				case 1: if (!hit(d)){hand.get(handWillPlay).willPlay = false;}
-					break;
-				case 2: stand();
-					break;
-				case 3: surrender();
-					break;
-				case 4:	doubl( sc );
-					break;
-				case 5: split(d);
-					break;
+				String options = GenerateOptions(r);
+				
+				System.out.println("Now it's your turn!");
+				if (r == 0 && !hand.get(handWillPlay).madeFromSplit)
+				{
+					GetBet(sc);
+				}
+				
+				System.out.println(toString());
+				System.out.println("Hand number: " + (handWillPlay + 1));
+				System.out.println("Number of hands you have: " + hand.size());
+				System.out.println("Hand Value: " + BlackJackCardValues.getCombinedValuesOfCardHand(hand.get(handWillPlay).getHand()));		
+				
+				System.out.println("Choose from the following options");
+				System.out.println(options);
+				
+				choice = GetOption(sc);
+				
+				switch (choice)
+				{
+					case 0:
+						break;
+					case 1: if (!hit(d)){hand.get(handWillPlay).willPlay = false;}
+						break;
+					case 2: stand();
+						break;
+					case 3: surrender();
+						break;
+					case 4:	doubl( sc, d );
+						break;
+					case 5: split(d);
+						break;
+				}
 			}
 		}
-		
 	}	
 	
 	private String GenerateOptions(int ir)
@@ -154,7 +155,12 @@ public class You extends Player
 	
 	public void win(int h)
 	{
-		money += hand.get(h).getBet() * 2;
+		double num = 2;
+		if ( hand.get(h).isBlackJack() )
+		{
+			num = 2.5;
+		}
+		money += hand.get(h).getBet() * num;
 	}
 
 	public void draw(int h) 
