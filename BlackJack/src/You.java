@@ -11,20 +11,21 @@ public class You extends Player
 		handWillPlay = 0;
 		int choice;
 		iOptions = new ArrayList<Integer>();
-		if (r == 0)
-		{
-			initHand(d);
-		}
+		//if (r == 0)
+		//{
+		//	initHand(d);
+		//}
 		
 		for ( handWillPlay = 0; handWillPlay < hand.size(); handWillPlay++ )
 		{
 			String options = GenerateOptions(r);
 			
 			System.out.println("Now it's your turn!");
-			if (r == 0)
+			if (r == 0 && !hand.get(handWillPlay).madeFromSplit)
 			{
 				GetBet(sc);
 			}
+			
 			System.out.println(toString());
 			System.out.println("Hand number: " + (handWillPlay + 1));
 			System.out.println("Number of hands you have: " + hand.size());
@@ -45,7 +46,7 @@ public class You extends Player
 					break;
 				case 3: surrender();
 					break;
-				case 4:	doubl(d, bet);
+				case 4:	doubl( sc );
 					break;
 				case 5: split(d);
 					break;
@@ -78,7 +79,7 @@ public class You extends Player
 		r += "Stand - 2\n";
 		iOptions.add(2);
 		
-		if (ir == 0)
+		if ( money >= hand.get(handWillPlay).getBet() && hand.get(handWillPlay).getHand().size() == 2)
 		{
 			r += "Surrender - 3\n";
 			iOptions.add(3);
@@ -89,7 +90,7 @@ public class You extends Player
 		if (hand.get(handWillPlay).getHand().size() == 2)
 		{
 			if (//hand.size() == 1 && hand.get(handWillPlay).getHand().size() == 2 &&
-				hand.get(handWillPlay).getHand().get(0).getFace() == hand.get(handWillPlay).getHand().get(1).getFace() && money >= bet * 2)
+				hand.get(handWillPlay).getHand().get(0).getFace() == hand.get(handWillPlay).getHand().get(1).getFace() && money >= hand.get(handWillPlay).getBet() * 2)
 			{
 				r += "Split - 5\n";
 				iOptions.add(5);
@@ -151,13 +152,13 @@ public class You extends Player
 		return money <= 0;
 	}
 	
-	public void win()
+	public void win(int h)
 	{
-		money += bet * 2;
+		money += hand.get(h).getBet() * 2;
 	}
 
-	public void draw() 
+	public void draw(int h) 
 	{
-		money += bet;		
+		money += hand.get(h).getBet();		
 	}
 }

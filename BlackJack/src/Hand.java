@@ -5,11 +5,13 @@ public class Hand
 	private ArrayList<Card> hand;
 	public boolean willPlay;
 	private int bet;
-	
+	public boolean madeFromSplit;
 	public Hand()
 	{
 		hand = new ArrayList<Card>();
 		willPlay = true;
+		bet = 0;
+		madeFromSplit = false;
 	}
 	
 	public void Add(Card c)
@@ -27,9 +29,9 @@ public class Hand
 		String p = new String();
 		for (int i = 0; i < hand.size(); i++)
 		{
-			p += hand.get(i).toString() + " ";
+			p += hand.get(i).toString() + " ";			
 		}
-		
+		p += "Bet: " + bet;
 		return p;
 	}
 	
@@ -77,5 +79,18 @@ public class Hand
 	public int getBet()
 	{
 		return bet;
+	}
+	
+	public boolean setBet(int b, int money)
+	{
+		boolean r = false;
+		
+		if ( b > 0 && b <= money )
+		{
+			r = true;
+			this.bet = b;
+		}
+		
+		return r;
 	}
 }

@@ -1,27 +1,27 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Player
 {
 	protected ArrayList<Hand> hand;
 	protected int money;
-	protected int bet;
 	protected int handWillPlay;
 	
 	public Player()
 	{
 		this.hand = new ArrayList<Hand>();
 		money = 1000;
-		bet = 0;
-	}
-	
-	public void initHand(Deck d)
-	{
-		Hand tmp = new Hand();
-		tmp.Add(d.draw());
-		hand = new ArrayList<Hand>();
-		hand.add(tmp);
 		handWillPlay = 0;
 	}
+	
+	//public void initHand(Deck d)
+	//{
+	//	Hand tmp = new Hand();
+	//	tmp.Add(d.draw());
+	//	hand = new ArrayList<Hand>();
+	//	hand.add(tmp);
+	//	handWillPlay = 0;
+	//}
 	
 	public boolean hit(Deck d)
 	{
@@ -44,25 +44,42 @@ public class Player
 	public void surrender()
 	{
 		hand.get(handWillPlay).willPlay = false;
-		money += bet / 2;
+		money += hand.get(handWillPlay).getBet() / 2;
 	}
 	
-	public boolean doubl(Deck d, int amt)
-	{		
-		return true;
+	public void doubl( Scanner sc )
+	{
+		int addedBet = getDoubleBet(sc);
+		hand.get(handWillPlay).setBet(hand.get(handWillPlay).getBet() + addedBet, money);
+	}
+	
+	public int getDoubleBet(Scanner sc)
+	{
+		int r = 0;
+		do
+		{
+			System.out.print("By how much do you want to increase your initial bet (limit: twice the original bet)?: ");
+			r = sc.nextInt();
+		}
+		while (r < 1 && r > hand.get(handWillPlay).getBet() * 2);
+		return r;
 	}
 	
 	public boolean split(Deck d)
 	{
 		boolean r = false;
 		
-		if ( money > bet * 2)
+		if ( money >= hand.get(handWillPlay).getBet() )
 		{
 			Hand tmp = new Hand();		
 			tmp.Add(hand.get(handWillPlay).Pop());
 			hand.add(tmp);
+			hand.get(hand.size()-1).setBet(hand.get(handWillPlay).getBet(), money);
+			hand.get(hand.size()-1).madeFromSplit = true;
 			r = true;
-		}
+			hand.get(hand.size() - 2).Add(d.draw());
+			hand.get(hand.size() - 1).Add(d.draw());			
+		}		
 		
 		return r;
 	}
@@ -71,9 +88,8 @@ public class Player
 	{
 		boolean r = false;
 		
-		if ( b <= money && b > 0)
-		{
-			bet = b;
+		if ( hand.get(handWillPlay).setBet(b, money) )
+		{			
 			money -= b;
 			r = true;
 		}
@@ -92,7 +108,7 @@ public class Player
 		}
 		
 		r += "Money: " + money + "\n";
-		r += "Bet: " + bet + "\n";
+		
 		
 		return r;
 	}
@@ -121,11 +137,6 @@ public class Player
 		return money;
 	}
 	
-	public int getBet()
-	{
-		return bet;
-	}
-	
 	public boolean isBust(int h)
 	{
 		return hand.get(h).isHandPlayable();
@@ -143,5 +154,19 @@ public class Player
 			}
 		}
 		return rv;
+	}
+	
+	public void deal ( Deck d, int h )
+	{
+		Hand a = new Hand();
+		if ( hand.size() <= h )
+		{
+			a.Add(d.draw());
+			hand.add(a);
+		}
+		else
+		{
+			hand.get(h).Add(d.draw());
+		}
 	}
 }

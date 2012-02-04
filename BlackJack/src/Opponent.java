@@ -14,10 +14,10 @@ public class Opponent extends Player
 	
 	public void Play(Deck d, int r)
 	{
-		if ( r == 0)
-		{
-			initHand(d);
-		}
+		//if ( r == 0 )
+		//{
+		//	initHand(d);
+		//}
 		
 		if (BlackJackCardValues.getCombinedValuesOfCardHand(this.hand.get(0).getHand()) < 17)
 		{

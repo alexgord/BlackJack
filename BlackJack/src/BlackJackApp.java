@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BlackJackApp
@@ -27,8 +28,20 @@ public class BlackJackApp
 		do
 		{
 			System.out.println("New Round\n");
-			while ( true)
+			opponent.hand = new ArrayList<Hand>();
+			player.hand = new ArrayList<Hand>();
+			for ( int i = 0; i < 2; i++ )
 			{
+				opponent.deal(deck, 0);
+				player.deal(deck, 0);
+			}
+			
+			while ( true )
+			{
+				for ( int s = 0; s < player.hand.size(); s++)
+				{
+					player.hand.get(s).madeFromSplit = false;
+				}
 				if ( opponent.getWillPlay() || rounds == 0)
 				{
 					System.out.println("--------dealer----------------------");
@@ -47,38 +60,27 @@ public class BlackJackApp
 				rounds++;
 			}
 			
-			boolean won = false;
 			for ( int c = 0; c < player.hand.size(); c++)
 			{
+				System.out.println( "\n" + player.hand.get(c).toString() );
 				if (!player.isBust(c) || (opponent.isBust(0) || player.getScore(c) >= opponent.getScore(0)))
 				{
 					if ( player.getScore(c) == opponent.getScore(0) && player.isBlackJack() && !opponent.isBlackJack())
 					{
-						//System.out.println("it was a draw");
-						//player.draw();
+						System.out.println("it was a draw");
+						player.draw(c);
+						
 					}
 					else
 					{
-						//System.out.println("you won");
-						//player.win();
-						won = true;
-						break;
+						System.out.println("you won");
+						player.win(c);
 					}
 				}
 				else
 				{
-					//System.out.println("dealer won");
+					System.out.println("dealer won");
 				}
-			}
-			
-			if ( won )
-			{
-				System.out.println("you won");
-				player.win();
-			}
-			else
-			{
-				System.out.println("Dealer won");
 			}
 			
 			rounds = 0;
