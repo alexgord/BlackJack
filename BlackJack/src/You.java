@@ -17,7 +17,7 @@ public class You extends Player
 		
 		for ( handWillPlay = 0; handWillPlay < hand.size(); handWillPlay++ )
 		{
-			if ( hand.get(handWillPlay).getHand().get(0).getFace() != Rank.ACE || handWillPlay == 0 )
+			if ( !(hand.get(handWillPlay).getHand().get(0).getFace() == Rank.ACE && handWillPlay > 0) )
 			{
 				String options = GenerateOptions(r);
 				
@@ -55,6 +55,8 @@ public class You extends Player
 			}
 			else
 			{
+				System.out.println(hand.get(handWillPlay).toString());
+				System.out.println("Hand number: " + (handWillPlay + 1));
 				System.out.println("Hand was skipped because it had an ace when it was split");
 			}
 		}
