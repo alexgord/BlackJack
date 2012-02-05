@@ -22,15 +22,16 @@ public class You extends Player
 				String options = GenerateOptions(r);
 				
 				System.out.println("Now it's your turn!");
-				if (r == 0 && !hand.get(handWillPlay).madeFromSplit)
-				{
-					GetBet(sc);
-				}
-				
+								
 				System.out.println(toString());
 				System.out.println("Hand number: " + (handWillPlay + 1));
 				System.out.println("Number of hands you have: " + hand.size());
 				System.out.println("Hand Value: " + BlackJackCardValues.getCombinedValuesOfCardHand(hand.get(handWillPlay).getHand()));		
+				
+				if (r == 0 && !hand.get(handWillPlay).madeFromSplit)
+				{
+					GetBet(sc);
+				}
 				
 				System.out.println("Choose from the following options");
 				System.out.println(options);

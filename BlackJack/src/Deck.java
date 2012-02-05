@@ -25,10 +25,20 @@ public class Deck
 	
 	/**
 	 * Shuffles the deck.
+	 * @param seed 
 	 */
-	public void shuffle()
+	public void shuffle(int seed)
 	{
-		Random generator = new Random();
+		int s;
+		if ( seed < 0 )
+		{
+			s = 0;
+		}
+		else
+		{
+			s = seed;
+		}
+		Random generator = new Random(s);
 		for(int i=0; i<deck.length; i++) {
 			int randPos = generator.nextInt(deck.length);
 			Card tmp = deck[randPos];

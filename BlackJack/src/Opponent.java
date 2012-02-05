@@ -19,6 +19,7 @@ public class Opponent extends Player
 		//	initHand(d);
 		//}
 		
+		System.out.println("Opponent's turn");
 		if (BlackJackCardValues.getCombinedValuesOfCardHand(this.hand.get(0).getHand()) < 17)
 		{
 			hit(d);
@@ -30,8 +31,9 @@ public class Opponent extends Player
 			System.out.println("Opponent stands");
 		}
 		
-		System.out.println("Opponent's turn");
-		System.out.println("Hand Value: " + BlackJackCardValues.getCombinedValuesOfCardHand(hand.get(handWillPlay).getHand()));
-		System.out.println(toString());
+		System.out.println("Dealer's first card from their hand: " + hand.get(0).getHand().get(0).toString());
+		//System.out.println("Hand Value: " + BlackJackCardValues.getCombinedValuesOfCardHand(hand.get(handWillPlay).getHand()));
+		
+		//System.out.println(toString());
 	}
 }

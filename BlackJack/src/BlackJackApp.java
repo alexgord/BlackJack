@@ -20,9 +20,13 @@ public class BlackJackApp
 		sc = new Scanner(System.in);
 		player = new You();
 		opponent = new Opponent();
-		
+		int seed;
 		//System.out.println(deck.toString());
-		//deck.shuffle();
+		
+		
+		System.out.print("Enter seed to use when shuffling deck: ");
+		seed = sc.nextInt();
+		deck.shuffle(seed);
 		System.out.println("---Alexandre's Casino!---");
 		
 		do
@@ -55,7 +59,7 @@ public class BlackJackApp
 				
 				if ( player.getWillPlay() )
 				{
-					System.out.println("--------you----------------------");
+					System.out.println("--------you-------------------------");
 					player.Play(deck, sc, rounds);
 				}
 				rounds++;
@@ -63,7 +67,8 @@ public class BlackJackApp
 			
 			for ( int c = 0; c < player.hand.size(); c++)
 			{
-				System.out.println( "\n" + player.hand.get(c).toString() );
+				System.out.println( "\nYour hand: " + player.hand.get(c).toString() );
+				System.out.println( "Dealer's hand: " + opponent.hand.get(c).toString() );
 				if (!player.hand.get(c).hasSurrendered)
 				{
 					if ((!player.isBust(c) || (opponent.isBust(0) || player.getScore(c) >= opponent.getScore(0))) )
@@ -95,5 +100,6 @@ public class BlackJackApp
 			rounds = 0;
 		}
 		while ( !player.Lost() );
+		System.out.println("you've lost all your money! Oh, no!");
 	}
 }
