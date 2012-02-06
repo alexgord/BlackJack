@@ -61,10 +61,10 @@ public class Player
 		int r = 0;
 		do
 		{
-			System.out.print("By how much do you want to increase your initial bet (limit: twice the original bet)?: ");
+			System.out.print("By how much do you want to increase your initial bet (limit: " + hand.get(handWillPlay).getBet() + " )?: ");
 			r = sc.nextInt();
 		}
-		while (r < 1 && r > hand.get(handWillPlay).getBet() * 2);
+		while (r < 1 && r > hand.get(handWillPlay).getBet());
 		return r;
 	}
 	
