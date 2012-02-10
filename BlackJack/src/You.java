@@ -20,16 +20,16 @@ public class You extends Player
 				{
 					GetBet(sc);
 				}
-				
-				String options = GenerateOptions(r);				
 								
-				System.out.println(toString());
-				System.out.println("Hand number: " + (handWillPlay + 1));
-				System.out.println("Number of hands you have: " + hand.size());
-				System.out.println("Hand Value: " + BlackJackCardValues.getCombinedValuesOfCardHand(hand.get(handWillPlay).getHand()));		
-				
-				if (hand.get(handWillPlay).isHandPlayable())
+				while (hand.get(handWillPlay).isHandPlayable() && hand.get(handWillPlay).willPlay)
 				{
+					String options = GenerateOptions(r);				
+					
+					System.out.println(toString());
+					System.out.println("Hand number: " + (handWillPlay + 1));
+					System.out.println("Number of hands you have: " + hand.size());
+					System.out.println("Hand Value: " + BlackJackCardValues.getCombinedValuesOfCardHand(hand.get(handWillPlay).getHand()));		
+					
 					System.out.println("Choose from the following options");
 					System.out.println(options);
 					
@@ -95,8 +95,7 @@ public class You extends Player
 		
 		if (hand.get(handWillPlay).getHand().size() == 2)
 		{
-			if (//hand.size() == 1 && hand.get(handWillPlay).getHand().size() == 2 &&
-				hand.get(handWillPlay).getHand().get(0).getFace() == hand.get(handWillPlay).getHand().get(1).getFace() && money >= hand.get(handWillPlay).getBet() * 2)
+			if (hand.get(handWillPlay).getHand().get(0).getFace() == hand.get(handWillPlay).getHand().get(1).getFace() && money >= hand.get(handWillPlay).getBet() * 2)
 			{
 				r += "Split - 5\n";
 				iOptions.add(5);

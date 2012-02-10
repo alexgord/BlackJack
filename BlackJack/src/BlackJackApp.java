@@ -19,13 +19,11 @@ public class BlackJackApp
 		sc = new Scanner(System.in);
 		player = new You();
 		opponent = new Opponent();
-		int seed;
-		//System.out.println(deck.toString());
-		
+		int seed;		
 		
 		System.out.print("Enter seed to use when shuffling deck: ");
 		seed = sc.nextInt();
-		deck.shuffle(seed);
+		//deck.shuffle(seed);
 		System.out.println("---Alexandre's Casino!---");
 		
 		do
@@ -39,42 +37,37 @@ public class BlackJackApp
 				player.deal(deck, 0, true);
 			}
 
-			while ( true )
+			System.out.println("Dealer's first card from their hand: " + opponent.hand.get(0).getHand().get(0).toString());
+			for ( int s = 0; s < player.hand.size(); s++)
 			{
-				for ( int s = 0; s < player.hand.size(); s++)
-				{
-					player.hand.get(s).madeFromSplit = false;
-				}
-				
-				if ( player.getWillPlay() )
-				{
-					System.out.println("--------you-------------------------");
-					player.Play(deck, sc, rounds);
-				}
-				
-				if ( opponent.getWillPlay() && player.hasHandNotBust() )
-				{
-					System.out.println("--------dealer----------------------");
-					opponent.Play(deck, rounds);
-				}
-				else
-				{
-					break;
-				}		
-				
-				rounds++;
+				player.hand.get(s).madeFromSplit = false;
 			}
+			
+			if ( player.getWillPlay() )
+			{
+				System.out.println("--------you-------------------------");
+				player.Play(deck, sc, rounds);
+			}
+			
+			if ( opponent.getWillPlay() && player.hasHandNotBust() )
+			{
+				System.out.println("--------dealer----------------------");
+				opponent.Play(deck, rounds);
+			}		
+			
+				
+			rounds++;
+
 			
 			for ( int c = 0; c < player.hand.size(); c++)
 			{
 				System.out.println( "\nYour hand: " + player.hand.get(c).toString() );
-				System.out.println( "Dealer's hand: " + opponent.hand.get(c).toString() );
+				System.out.println( "Dealer's hand: " + opponent.hand.get(0).toString() );
 				if (!player.hand.get(c).hasSurrendered)
 				{
-					if ((!player.isBust(c) & (opponent.isBust(0) || player.getScore(c) >= opponent.getScore(0))) )
-					{
-						
-						if ( player.getScore(c) == opponent.getScore(0) && player.isBlackJack(c) && !opponent.isBlackJack(0))
+					if (!player.isBust(c) && (opponent.isBust(0) || player.getScore(c) >= opponent.getScore(0)))
+					{						
+						if ( player.getScore(c) == opponent.getScore(0) && !opponent.isBlackJack(0))
 						{
 							System.out.println("This hand was a draw");
 							player.draw(c);

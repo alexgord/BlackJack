@@ -94,7 +94,7 @@ public class Hand
 	
 	public boolean isHandPlayable( )
 	{
-		return BlackJackCardValues.getCombinedValuesOfCardHand(this.hand) <= 21;
+		return BlackJackCardValues.getCombinedValuesOfCardHand(hand) <= 21;
 	}
 	
 	public int getBet()

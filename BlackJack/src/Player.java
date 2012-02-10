@@ -116,7 +116,7 @@ public class Player
 	
 	public boolean isBust(int h)
 	{
-		return hand.get(h).isHandPlayable();
+		return !hand.get(h).isHandPlayable();
 	}
 	
 	public boolean isBlackJack(int h)
