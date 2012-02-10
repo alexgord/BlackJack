@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 
 public class Opponent extends Player
 {
@@ -35,5 +37,25 @@ public class Opponent extends Player
 		//System.out.println("Hand Value: " + BlackJackCardValues.getCombinedValuesOfCardHand(hand.get(handWillPlay).getHand()));
 		
 		//System.out.println(toString());
+	}
+	
+	public String toString()
+	{
+		String r = new String();
+		
+		for ( int i = 0; i < this.hand.size(); i++)
+		{
+			r += "Hand : ";
+			r += this.hand.get(i).toString();
+			r += "\n";
+		}
+				
+		return r;
+	}
+	
+	public void initHand()
+	{
+		ArrayList<Hand> n = new ArrayList<Hand>();
+		hand = n;
 	}
 }

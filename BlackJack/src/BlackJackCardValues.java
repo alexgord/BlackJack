@@ -63,42 +63,6 @@ public class BlackJackCardValues
 		}
 		
 		return returnedValue;
-	}	
-	
-	public static void test()
-	{
-		
-		ArrayList<ArrayList<Integer>> testar = new ArrayList<ArrayList<Integer>>();
-		//ArrayList<ArrayList<Integer>> testarray = new ArrayList<ArrayList<Integer>>();
-		ArrayList<Integer> test1 = new ArrayList<Integer>();
-		ArrayList<Integer> test2 = new ArrayList<Integer>();
-		ArrayList<Integer> test3 = new ArrayList<Integer>();
-		test1.add(1);
-		test1.add(2);
-		test1.add(3);
-		
-		test2.add(4);
-		test2.add(5);
-		test2.add(6);
-		
-		test3.add(7);
-		test3.add(8);
-		test3.add(9);
-		
-		testar.add(test1);
-		testar.add(test2);
-		testar.add(test3);
-		
-		ArrayList<Integer> sum = new ArrayList<Integer>();
-		
-		generateSums(sum, 0, testar, 0);
-		
-		sort(sum);
-		
-		for ( int i = 0; i < sum.size(); i++ )
-		{
-			System.out.println(sum.get(i));
-		}
 	}
 	
 	private static void generateSums(ArrayList<Integer> sum, int prefix, ArrayList<ArrayList<Integer>> arr, int cindex)

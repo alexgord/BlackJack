@@ -7,14 +7,16 @@ public class Hand
 	private int bet;
 	public boolean madeFromSplit;
 	public boolean hasSurrendered;
+	private boolean displayBet;
 	
-	public Hand()
+	public Hand(boolean db)
 	{
 		hand = new ArrayList<Card>();
 		willPlay = true;
 		bet = 0;
 		madeFromSplit = false;
 		hasSurrendered = false;
+		displayBet = db;
 	}
 	
 	public void Add(Card c)
@@ -27,14 +29,30 @@ public class Hand
 		return hand.remove(hand.size() - 1);
 	}
 	
-	public String toString()
+	public String toString( )
 	{
 		String p = new String();
 		for (int i = 0; i < hand.size(); i++)
 		{
-			p += hand.get(i).toString() + " ";			
+			p += hand.get(i).toString();
+			if ( i < hand.size() - 1 )
+			{
+				p += ", ";
+			}
+			else
+			{
+				p += " ";
+			}
+			 
 		}
-		p += "Bet: " + bet;
+		
+		p += "Score: " + BlackJackCardValues.getCombinedValuesOfCardHand(hand) + " ";
+		
+		if ( displayBet )
+		{
+			p += "Bet: " + bet;
+		}
+		
 		return p;
 	}
 	

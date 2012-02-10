@@ -68,13 +68,13 @@ public class Player
 		return r;
 	}
 	
-	public boolean split(Deck d)
+	public boolean split(Deck d, boolean db)
 	{
 		boolean r = false;
 		
 		if ( money >= hand.get(handWillPlay).getBet() )
 		{
-			Hand tmp = new Hand();		
+			Hand tmp = new Hand(db);		
 			tmp.Add(hand.get(handWillPlay).Pop());
 			hand.add(tmp);
 			hand.get(hand.size()-1).setBet(hand.get(handWillPlay).getBet(), money);
@@ -96,23 +96,6 @@ public class Player
 			money -= b;
 			r = true;
 		}
-		return r;
-	}
-	
-	public String toString()
-	{
-		String r = new String();
-		
-		for ( int i = 0; i < this.hand.size(); i++)
-		{
-			r += "Hand " + (i+ 1) + ": ";
-			r += this.hand.get(i).toString();
-			r += "\n";
-		}
-		
-		r += "Money: " + money + "\n";
-		
-		
 		return r;
 	}
 	
@@ -150,9 +133,9 @@ public class Player
 		return hand.get(h).isBlackJack() && h == 0;
 	}
 	
-	public void deal ( Deck d, int h )
+	public void deal ( Deck d, int h, boolean db )
 	{
-		Hand a = new Hand();
+		Hand a = new Hand(db);
 		if ( hand.size() <= h )
 		{
 			a.Add(d.draw());
@@ -162,5 +145,21 @@ public class Player
 		{
 			hand.get(h).Add(d.draw());
 		}
+	}
+	
+	public boolean hasHandNotBust()
+	{
+		boolean r = false;
+		
+		for ( int i = 0; i < hand.size(); i ++)
+		{
+			if (hand.get(i).isHandPlayable())
+			{
+				r = true;
+				break;
+			}
+		}
+		
+		return r;
 	}
 }

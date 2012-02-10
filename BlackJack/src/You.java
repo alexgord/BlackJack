@@ -10,48 +10,46 @@ public class You extends Player
 		handWillPlay = 0;
 		int choice;
 		iOptions = new ArrayList<Integer>();
-		//if (r == 0)
-		//{
-		//	initHand(d);
-		//}
 		
 		for ( handWillPlay = 0; handWillPlay < hand.size(); handWillPlay++ )
 		{
 			if ( !(hand.get(handWillPlay).getHand().get(0).getFace() == Rank.ACE && handWillPlay > 0) )
 			{
-				String options = GenerateOptions(r);
-				
 				System.out.println("Now it's your turn!");
+				if (r == 0 && !hand.get(handWillPlay).madeFromSplit)
+				{
+					GetBet(sc);
+				}
+				
+				String options = GenerateOptions(r);				
 								
 				System.out.println(toString());
 				System.out.println("Hand number: " + (handWillPlay + 1));
 				System.out.println("Number of hands you have: " + hand.size());
 				System.out.println("Hand Value: " + BlackJackCardValues.getCombinedValuesOfCardHand(hand.get(handWillPlay).getHand()));		
 				
-				if (r == 0 && !hand.get(handWillPlay).madeFromSplit)
+				if (hand.get(handWillPlay).isHandPlayable())
 				{
-					GetBet(sc);
-				}
-				
-				System.out.println("Choose from the following options");
-				System.out.println(options);
-				
-				choice = GetOption(sc);
-				
-				switch (choice)
-				{
-					case 0:
-						break;
-					case 1: if (!hit(d)){hand.get(handWillPlay).willPlay = false;}
-						break;
-					case 2: stand();
-						break;
-					case 3: surrender();
-						break;
-					case 4:	doubl( sc, d );
-						break;
-					case 5: split(d);
-						break;
+					System.out.println("Choose from the following options");
+					System.out.println(options);
+					
+					choice = GetOption(sc);
+					
+					switch (choice)
+					{
+						case 0:
+							break;
+						case 1: if (!hit(d)){hand.get(handWillPlay).willPlay = false;}
+							break;
+						case 2: stand();
+							break;
+						case 3: surrender();
+							break;
+						case 4:	doubl( sc, d );
+							break;
+						case 5: split(d, true);
+							break;
+					}
 				}
 			}
 			else
@@ -155,6 +153,23 @@ public class You extends Player
 		
 	}
 	
+	public String toString()
+	{
+		String r = new String();
+		
+		for ( int i = 0; i < this.hand.size(); i++)
+		{
+			r += "Hand " + (i+ 1) + ": ";
+			r += this.hand.get(i).toString();
+			r += "\n";
+		}
+		
+		r += "Money: " + money + "\n";
+		
+		
+		return r;
+	}
+	
 	public boolean Lost()
 	{
 		return money <= 0;
@@ -173,5 +188,10 @@ public class You extends Player
 	public void draw(int h) 
 	{
 		money += hand.get(h).getBet();		
+	}
+	
+	public void initHand()
+	{
+		hand = new ArrayList<Hand>();
 	}
 }

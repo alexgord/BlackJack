@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BlackJackApp
@@ -31,15 +30,15 @@ public class BlackJackApp
 		
 		do
 		{
-			System.out.println("New Round\n");
-			opponent.hand = new ArrayList<Hand>();
-			player.hand = new ArrayList<Hand>();
+			System.out.println("\nNew Round\n");
+			opponent.initHand();
+			player.initHand();
 			for ( int i = 0; i < 2; i++ )
 			{
-				opponent.deal(deck, 0);
-				player.deal(deck, 0);
+				opponent.deal(deck, 0, false);
+				player.deal(deck, 0, true);
 			}
-			
+
 			while ( true )
 			{
 				for ( int s = 0; s < player.hand.size(); s++)
@@ -47,7 +46,13 @@ public class BlackJackApp
 					player.hand.get(s).madeFromSplit = false;
 				}
 				
-				if ( opponent.getWillPlay() )
+				if ( player.getWillPlay() )
+				{
+					System.out.println("--------you-------------------------");
+					player.Play(deck, sc, rounds);
+				}
+				
+				if ( opponent.getWillPlay() && player.hasHandNotBust() )
 				{
 					System.out.println("--------dealer----------------------");
 					opponent.Play(deck, rounds);
@@ -55,13 +60,8 @@ public class BlackJackApp
 				else
 				{
 					break;
-				}
+				}		
 				
-				if ( player.getWillPlay() )
-				{
-					System.out.println("--------you-------------------------");
-					player.Play(deck, sc, rounds);
-				}
 				rounds++;
 			}
 			
@@ -71,7 +71,7 @@ public class BlackJackApp
 				System.out.println( "Dealer's hand: " + opponent.hand.get(c).toString() );
 				if (!player.hand.get(c).hasSurrendered)
 				{
-					if ((!player.isBust(c) || (opponent.isBust(0) || player.getScore(c) >= opponent.getScore(0))) )
+					if ((!player.isBust(c) & (opponent.isBust(0) || player.getScore(c) >= opponent.getScore(0))) )
 					{
 						
 						if ( player.getScore(c) == opponent.getScore(0) && player.isBlackJack(c) && !opponent.isBlackJack(0))

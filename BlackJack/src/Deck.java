@@ -29,16 +29,16 @@ public class Deck
 	 */
 	public void shuffle(int seed)
 	{
-		int s;
+		Random generator;
 		if ( seed < 0 )
 		{
-			s = 0;
+			generator = new Random();
 		}
 		else
 		{
-			s = seed;
+			generator = new Random(seed);
 		}
-		Random generator = new Random(s);
+
 		for(int i=0; i<deck.length; i++) {
 			int randPos = generator.nextInt(deck.length);
 			Card tmp = deck[randPos];
