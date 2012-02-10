@@ -5,7 +5,7 @@ public class You extends Player
 {	
 	private ArrayList<Integer> iOptions;
 	
-	public void Play(Deck d, Scanner sc, int r)
+	public void Play(Deck d, Scanner sc, int r, String otc)
 	{
 		handWillPlay = 0;
 		int choice;
@@ -20,11 +20,12 @@ public class You extends Player
 				{
 					GetBet(sc);
 				}
-								
+				
 				while (hand.get(handWillPlay).isHandPlayable() && hand.get(handWillPlay).willPlay)
 				{
 					String options = GenerateOptions(r);				
 					
+					System.out.println(otc);
 					System.out.println(toString());
 					System.out.println("Hand number: " + (handWillPlay + 1));
 					System.out.println("Number of hands you have: " + hand.size());

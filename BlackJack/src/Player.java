@@ -72,6 +72,7 @@ public class Player
 			hand.get(hand.size()-1).madeFromSplit = true;
 			r = true;
 			hand.get(hand.size() - 2).Add(d.draw());
+			hand.get(hand.size() - 2).willPlay = false;
 			hand.get(hand.size() - 1).Add(d.draw());			
 		}		
 		

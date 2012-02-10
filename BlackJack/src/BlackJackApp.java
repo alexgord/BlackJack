@@ -23,12 +23,13 @@ public class BlackJackApp
 		
 		System.out.print("Enter seed to use when shuffling deck: ");
 		seed = sc.nextInt();
-		//deck.shuffle(seed);
+		
 		System.out.println("---Alexandre's Casino!---");
 		
 		do
 		{
-			System.out.println("\nNew Round\n");
+			deck.shuffle(seed);
+			System.out.println("\n------------------New Round---------------------------\n");
 			opponent.initHand();
 			player.initHand();
 			for ( int i = 0; i < 2; i++ )
@@ -36,17 +37,17 @@ public class BlackJackApp
 				opponent.deal(deck, 0, false);
 				player.deal(deck, 0, true);
 			}
+			
 
-			System.out.println("Dealer's first card from their hand: " + opponent.hand.get(0).getHand().get(0).toString());
 			for ( int s = 0; s < player.hand.size(); s++)
 			{
 				player.hand.get(s).madeFromSplit = false;
 			}
-			
+			String otc = "Dealer's first card from their hand: " + opponent.hand.get(0).getHand().get(0).toString();
 			if ( player.getWillPlay() )
 			{
 				System.out.println("--------you-------------------------");
-				player.Play(deck, sc, rounds);
+				player.Play(deck, sc, rounds, otc);
 			}
 			
 			if ( opponent.getWillPlay() && player.hasHandNotBust() )

@@ -30,11 +30,6 @@ public class Opponent extends Player
 				System.out.println("Opponent stands");
 			}
 		}
-		
-		
-		//System.out.println("Hand Value: " + BlackJackCardValues.getCombinedValuesOfCardHand(hand.get(handWillPlay).getHand()));
-		
-		//System.out.println(toString());
 	}
 	
 	public String toString()
