@@ -14,20 +14,11 @@ public class Player
 		handWillPlay = 0;
 	}
 	
-	//public void initHand(Deck d)
-	//{
-	//	Hand tmp = new Hand();
-	//	tmp.Add(d.draw());
-	//	hand = new ArrayList<Hand>();
-	//	hand.add(tmp);
-	//	handWillPlay = 0;
-	//}
-	
 	public boolean hit(Deck d)
 	{
 		boolean r = false;
 		
-		if (hand.get(handWillPlay).isHandPlayable())// TODO: make sure this applies to all hands
+		if (hand.get(handWillPlay).isHandPlayable())
 		{
 			hand.get(handWillPlay).Add(d.draw());
 			r = true;
